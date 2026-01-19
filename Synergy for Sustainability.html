@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synergy For Sustainability AI - SDG Intelligence Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A8A4D;
+            --secondary: #1A5FB4;
+            --accent: #FF6B35;
+            --ai-purple: #8B5CF6;
+            --dark: #0F172A;
+            --darker: #020617;
+            --light: #F8FAFC;
+            --gray: #64748B;
+            --light-gray: #E2E8F0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(10, 138, 77, 0.3);
+            --ai-glow: rgba(139, 92, 246, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .background-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            top: -200px;
+            right: -100px;
+            background: radial-gradient(circle at 30% 30%, #E5243B22, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            left: -100px;
+            background: radial-gradient(circle at 70% 70%, #4C9F3822, transparent 70%);
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 20%;
+            background: radial-gradient(circle at 50% 20%, #0A97D922, transparent 70%);
+            animation-delay: 10s;
+        }
+
+        .orb-4 {
+            width: 250px;
+            height: 250px;
+            top: 20%;
+            right: 15%;
+            background: radial-gradient(circle at 60% 40%, #8B5CF622, transparent 70%);
+            animation-delay: 15s;
+        }
+
+        .grid-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--glass-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Header */
+        .dashboard-header {
+            backdrop-filter: blur(20px);
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .dashboard-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title-gradient {
+            background: linear-gradient(135deg, #0A8A4D, #1A5FB4, #FF6B35, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-sub {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, var(--ai-purple), #A78BFA);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .dashboard-tagline {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            min-width: 300px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* AI Chat Interface */
+        .ai-section {
+            backdrop-filter: blur(20px);
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--ai-purple), #A78BFA);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .ai-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .ai-title span {
+            background: linear-gradient(135deg, var(--ai-purple), #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ai-description {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .chat-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            animation: messageAppear 0.3s ease-out;
+        }
+
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .user-avatar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .ai-avatar {
+            background: linear-gradient(135deg, var(--ai-purple), #A78BFA);
+        }
+
+        .message-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            max-width: 80%;
+        }
+
+        .user-message .message-content {
+            background: rgba(10, 138, 77, 0.1);
+            border-color: rgba(10, 138, 77, 0.2);
+        }
+
+        .ai-message .message-content {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .message-text {
+            line-height: 1.6;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--ai-purple);
+            box-shadow: 0 0 20px var(--ai-glow);
+        }
+
+        .chat-input::placeholder {
+            color: var(--gray);
+        }
+
+        .chat-send-btn {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--ai-purple), #A78BFA);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--ai-glow);
+        }
+
+        .chat-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .ai-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .suggestion-btn {
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-btn:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: white;
+            border-color: var(--ai-purple);
+        }
+
+        /* View Switcher */
+        .view-switcher {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 2rem;
+            animation: slideUp 0.5s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .switch-buttons {
+            display: flex;
+            gap: 1rem;
+            background: var(--glass);
+            padding: 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .switch-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            color: var(--gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .switch-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(10, 138, 77, 0.3);
+        }
+
+        .switch-btn.ai-active {
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .switch-btn.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .switch-btn.ai-active::before {
+            background: linear-gradient(90deg, var(--ai-purple), #A78BFA);
+        }
+
+        .switch-icon {
+            font-size: 1.2rem;
+        }
+
+        .switch-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .ai-badge-small {
+            background: var(--ai-purple);
+        }
+
+        .search-filter {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .search-input::placeholder {
+            color: var(--gray);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .search-action-btn {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-action-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* SDG Cards Grid */
+        .sdg-cards-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .sdg-filters-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .sdg-filter-btn {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-number {
+            font-size: 0.9rem;
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .filter-title {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .sdg-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sdg-card {
+            cursor: pointer;
+            animation: cardAppear 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .sdg-card:nth-child(1) { animation-delay: 0.1s; }
+        .sdg-card:nth-child(2) { animation-delay: 0.2s; }
+        .sdg-card:nth-child(3) { animation-delay: 0.3s; }
+        .sdg-card:nth-child(4) { animation-delay: 0.4s; }
+        .sdg-card:nth-child(5) { animation-delay: 0.5s; }
+        .sdg-card:nth-child(6) { animation-delay: 0.6s; }
+        .sdg-card:nth-child(7) { animation-delay: 0.7s; }
+        .sdg-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .sdg-card-inner {
+            position: relative;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .sdg-card-inner:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .sdg-card-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sdg-card:hover .sdg-card-inner::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .sdg-number-glow {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .card-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .sdg-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .sdg-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .sdg-context {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .quick-action {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .learn-more {
+            font-size: 0.9rem;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .sdg-card:hover .learn-more {
+            color: white;
+        }
+
+        .card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            filter: blur(20px);
+            transition: opacity 0.3s ease;
+        }
+
+        .sdg-card:hover .card-glow {
+            opacity: 0.3;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .resource-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--glass);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            color: var(--gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .category-icon {
+            font-size: 1.2rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: cardAppear 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .resource-card:nth-child(1) { animation-delay: 0.1s; }
+        .resource-card:nth-child(2) { animation-delay: 0.2s; }
+        .resource-card:nth-child(3) { animation-delay: 0.3s; }
+        .resource-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .resource-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .resource-type-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .resource-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .resource-description {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resource-action-btn {
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .resource-action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .bookmark-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bookmark-btn:hover {
+            color: var(--accent);
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* API Section */
+        .api-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--glass);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .api-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .api-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .api-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .api-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .api-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .api-card p {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .api-card code {
+            display: block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.8rem;
+            color: #7DD3FC;
+            overflow-x: auto;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* AI Thinking Animation */
+        .thinking-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .thinking-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ai-purple);
+            animation: thinking 1.4s infinite ease-in-out;
+        }
+
+        .thinking-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .thinking-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes thinking {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .sdg-filters-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .dashboard-title {
+                font-size: 2.5rem;
+            }
+            
+            .sdg-filters-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .sdg-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 1rem;
+            }
+            
+            .view-switcher {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .switch-buttons {
+                width: 100%;
+            }
+            
+            .switch-btn {
+                flex: 1;
+                justify-content: center;
+            }
+            
+            .search-filter {
+                max-width: 100%;
+            }
+            
+            .sdg-filters-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .sdg-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .api-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sdg-filters-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .resource-categories {
+                flex-direction: column;
+            }
+            
+            .category-btn {
+                justify-content: center;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        .api-key-input {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            align-items: center;
+        }
+
+        .api-key-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .api-key-input button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+        <div class="floating-orb orb-4"></div>
+        <div class="grid-lines"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="dashboard-title">
+                        <span class="title-gradient">Synergy For Sustainability AI</span>
+                        <span class="title-sub">SDG Intelligence Platform <span class="ai-badge">Powered by Gemini AI</span></span>
+                    </h1>
+                    <p class="dashboard-tagline">
+                        Connecting Sustainable Development Goals with actionable insights and AI-powered analysis
+                    </p>
+                    
+                    <div class="api-key-input">
+                        <input type="password" id="apiKeyInput" placeholder="Enter your Gemini API key to enable AI features">
+                        <button id="saveApiKey">Save Key</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- AI Chat Interface -->
+        <section class="ai-section" id="aiSection">
+            <div class="ai-header">
+                <div class="ai-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h2 class="ai-title">SDG <span>AI Assistant</span></h2>
+            </div>
+            <p class="ai-description">
+                Ask questions about any Sustainable Development Goal, get AI-powered insights, or analyze SDG data.
+                The assistant can help you understand goals, find resources, and suggest implementation strategies.
+            </p>
+            
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message ai-message">
+                        <div class="message-avatar ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">Hello! I'm your SDG AI Assistant. I can help you understand the 17 Sustainable Development Goals, analyze their progress, and suggest implementation strategies. How can I assist you today?</div>
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ask about SDGs, progress, or implementation...">
+                    <button class="chat-send-btn" id="sendMessage">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+            
+            <div class="ai-suggestions">
+                <button class="suggestion-btn" data-prompt="What is the current progress on SDG 13: Climate Action?">SDG 13 Progress</button>
+                <button class="suggestion-btn" data-prompt="How can businesses contribute to SDG 8: Decent Work and Economic Growth?">Business & SDG 8</button>
+                <button class="suggestion-btn" data-prompt="What are the most effective strategies for achieving SDG 4: Quality Education?">SDG 4 Strategies</button>
+                <button class="suggestion-btn" data-prompt="Which countries are leading in SDG implementation and why?">Leading Countries</button>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <div class="view-switcher">
+            <div class="switch-buttons">
+                <button class="switch-btn" id="viewCards">
+                    <span class="switch-icon">🎯</span>
+                    <span class="switch-text">SDG Cards</span>
+                    <span class="switch-badge">17</span>
+                </button>
+                <button class="switch-btn" id="viewResources">
+                    <span class="switch-icon">📚</span>
+                    <span class="switch-text">Resources</span>
+                    <span class="switch-badge">10</span>
+                </button>
+                <button class="switch-btn ai-active active" id="viewAI">
+                    <span class="switch-icon"><i class="fas fa-robot"></i></span>
+                    <span class="switch-text">AI Assistant</span>
+                    <span class="switch-badge ai-badge-small">Live</span>
+                </button>
+            </div>
+
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search SDGs or resources...">
+                    <span class="search-icon">🔍</span>
+                    <button class="search-action-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SDG Cards Section -->
+        <section class="sdg-cards-section hidden" id="cardsSection">
+            <div class="sdg-filters-grid" id="sdgFilters">
+                <!-- SDG filter buttons will be generated by JavaScript -->
+            </div>
+
+            <div class="sdg-cards-grid" id="sdgCardsGrid">
+                <!-- SDG cards will be generated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="resources-section hidden" id="resourcesSection">
+            <div class="resource-categories" id="resourceCategories">
+                <!-- Resource categories will be generated by JavaScript -->
+            </div>
+
+            <div class="resources-grid" id="resourcesGrid">
+                <!-- Resource cards will be generated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- API Integration Section -->
+        <section class="api-section">
+            <h3 class="api-title">API Integration</h3>
+            <div class="api-grid">
+                <div class="api-card">
+                    <div class="api-icon">🔗</div>
+                    <h4>SDG Data API</h4>
+                    <p>Access real-time SDG indicators and progress data</p>
+                    <code>https://unstats.un.org/sdgapi/v1/sdg/Goal</code>
+                </div>
+                <div class="api-card">
+                    <div class="api-icon">📊</div>
+                    <h4>Visualization Tools</h4>
+                    <p>Embed interactive charts and maps in your app</p>
+                    <code>&lt;iframe src="sdg-tracker.org"&gt;&lt;/iframe&gt;</code>
+                </div>
+                <div class="api-card">
+                    <div class="api-icon">🎨</div>
+                    <h4>Design Assets</h4>
+                    <p>Download official SDG icons and color palettes</p>
+                    <code>https://sdg-icons.s3.amazonaws.com/</code>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>SynergyMap AI • SDG Intelligence Platform • Powered by Google Gemini AI</p>
+            <p>This is a demonstration application. For production use, ensure you have proper API keys and permissions.</p>
+        </div>
+    </div>
+
+    <script>
+        // Sample SDG data
+        const sdgs = [
+            { id: 1, number: '01', title: 'No Poverty', shortTitle: 'Poverty', color: '#E5243B', gradient: 'linear-gradient(135deg, #E5243B 0%, #FF6B8B 100%)', icon: '🏠', context: 'Over 700 million people still live in extreme poverty, struggling to fulfill the most basic needs like health, education, and access to water.', aim: 'To end poverty in all its forms everywhere by 2030.', progress: 65, officialUrl: 'https://www.un.org/sustainabledevelopment/poverty/' },
+            { id: 2, number: '02', title: 'Zero Hunger', shortTitle: 'Hunger', color: '#DDA63A', gradient: 'linear-gradient(135deg, #DDA63A 0%, #FFD166 100%)', icon: '🌾', context: 'Global hunger is rising again due to conflict, climate change, and economic instability, affecting nearly 10% of the world.', aim: 'End hunger, achieve food security, improve nutrition, and promote sustainable agriculture.', progress: 55, officialUrl: 'https://www.un.org/sustainabledevelopment/hunger/' },
+            { id: 3, number: '03', title: 'Good Health and Well-Being', shortTitle: 'Health', color: '#4C9F38', gradient: 'linear-gradient(135deg, #4C9F38 0%, #8BC34A 100%)', icon: '❤️', context: 'While progress has been made, millions die every year from preventable diseases and lack of access to basic healthcare.', aim: 'Ensure healthy lives and promote well-being for all at all ages.', progress: 72, officialUrl: 'https://www.un.org/sustainabledevelopment/health/' },
+            { id: 4, number: '04', title: 'Quality Education', shortTitle: 'Education', color: '#C5192D', gradient: 'linear-gradient(135deg, #C5192D 0%, #FF5252 100%)', icon: '📚', context: 'Education is a human right, yet many children lack basic literacy, and the digital divide has widened learning gaps.', aim: 'Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.', progress: 68, officialUrl: 'https://www.un.org/sustainabledevelopment/education/' },
+            { id: 5, number: '05', title: 'Gender Equality', shortTitle: 'Equality', color: '#FF3A21', gradient: 'linear-gradient(135deg, #FF3A21 0%, #FF8A80 100%)', icon: '⚖️', context: 'Women and girls represent half of the world\'s population, yet they continue to face discrimination, violence, and unequal pay.', aim: 'Achieve gender equality and empower all women and girls.', progress: 48, officialUrl: 'https://www.un.org/sustainabledevelopment/gender-equality/' },
+            { id: 6, number: '06', title: 'Clean Water and Sanitation', shortTitle: 'Water', color: '#26BDE2', gradient: 'linear-gradient(135deg, #26BDE2 0%, #80DEEA 100%)', icon: '💧', context: '1 in 3 people worldwide does not have access to safe drinking water, and billions lack basic handwashing facilities.', aim: 'Ensure availability and sustainable management of water and sanitation for all.', progress: 75, officialUrl: 'https://www.un.org/sustainabledevelopment/water-and-sanitation/' },
+            { id: 7, number: '07', title: 'Affordable and Clean Energy', shortTitle: 'Energy', color: '#FCC30B', gradient: 'linear-gradient(135deg, #FCC30B 0%, #FFEE58 100%)', icon: '⚡', context: 'Our current energy system is the dominant contributor to climate change, while millions still live in the dark without electricity.', aim: 'Ensure access to affordable, reliable, sustainable, and modern energy for all.', progress: 80, officialUrl: 'https://www.un.org/sustainabledevelopment/energy/' },
+            { id: 8, number: '08', title: 'Decent Work and Economic Growth', shortTitle: 'Work', color: '#A21942', gradient: 'linear-gradient(135deg, #A21942 0%, #EC407A 100%)', icon: '💼', context: 'Economic growth should not come at the cost of the environment or human rights, yet many workers face "modern slavery" or unsafe conditions.', aim: 'Promote sustained, inclusive, and sustainable economic growth and decent work for all.', progress: 62, officialUrl: 'https://www.un.org/sustainabledevelopment/economic-growth/' },
+            { id: 9, number: '09', title: 'Industry, Innovation and Infrastructure', shortTitle: 'Innovation', color: '#FD6925', gradient: 'linear-gradient(135deg, #FD6925 0%, #FFAB91 100%)', icon: '🏗️', context: 'Reliable infrastructure is the backbone of any society, but many developing countries still lack basic transport and internet access.', aim: 'Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.', progress: 58, officialUrl: 'https://www.un.org/sustainabledevelopment/infrastructure-industrialization/' },
+            { id: 10, number: '10', title: 'Reduced Inequalities', shortTitle: 'Inequality', color: '#DD1367', gradient: 'linear-gradient(135deg, #DD1367 0%, #F48FB1 100%)', icon: '📊', context: 'The gap between the richest and poorest is widening, often based on gender, age, disability, race, or religion.', aim: 'Reduce inequality within and among countries.', progress: 45, officialUrl: 'https://www.un.org/sustainabledevelopment/inequality/' },
+            { id: 11, number: '11', title: 'Sustainable Cities and Communities', shortTitle: 'Cities', color: '#FD9D24', gradient: 'linear-gradient(135deg, #FD9D24 0%, #FFCC80 100%)', icon: '🏙️', context: 'Most people now live in cities, which generate 80% of global GDP but also produce 70% of global carbon emissions.', aim: 'Make cities and human settlements inclusive, safe, resilient, and sustainable.', progress: 70, officialUrl: 'https://www.un.org/sustainabledevelopment/cities/' },
+            { id: 12, number: '12', title: 'Responsible Consumption and Production', shortTitle: 'Consumption', color: '#BF8B2E', gradient: 'linear-gradient(135deg, #BF8B2E 0%, #D7CCC8 100%)', icon: '🔄', context: 'Humans are consuming resources faster than the Earth can replenish them, creating massive waste and pollution.', aim: 'Ensure sustainable consumption and production patterns.', progress: 40, officialUrl: 'https://www.un.org/sustainabledevelopment/sustainable-consumption-production/' },
+            { id: 13, number: '13', title: 'Climate Action', shortTitle: 'Climate', color: '#3F7E44', gradient: 'linear-gradient(135deg, #3F7E44 0%, #81C784 100%)', icon: '🌍', context: 'Climate change is a global emergency that affects every country on every continent, disrupting economies and lives.', aim: 'Take urgent action to combat climate change and its impacts.', progress: 35, officialUrl: 'https://www.un.org/sustainabledevelopment/climate-change/' },
+            { id: 14, number: '14', title: 'Life Below Water', shortTitle: 'Oceans', color: '#0A97D9', gradient: 'linear-gradient(135deg, #0A97D9 0%, #80DEEA 100%)', icon: '🐠', context: 'Oceans drive global systems that make the Earth habitable, but they are being choked by plastic and acidified by carbon.', aim: 'Conserve and sustainably use the oceans, seas, and marine resources.', progress: 25, officialUrl: 'https://www.un.org/sustainabledevelopment/oceans/' },
+            { id: 15, number: '15', title: 'Life on Land', shortTitle: 'Land', color: '#56C02B', gradient: 'linear-gradient(135deg, #56C02B 0%, #A5D6A7 100%)', icon: '🌳', context: 'Forests are home to 80% of all terrestrial species, but we are losing them at an alarming rate, leading to desertification.', aim: 'Protect, restore, and promote sustainable use of terrestrial ecosystems and halt biodiversity loss.', progress: 30, officialUrl: 'https://www.un.org/sustainabledevelopment/biodiversity/' },
+            { id: 16, number: '16', title: 'Peace, Justice and Strong Institutions', shortTitle: 'Peace', color: '#00689D', gradient: 'linear-gradient(135deg, #00689D 0%, #64B5F6 100%)', icon: '⚖️', context: 'Without peace and justice, sustainable development cannot happen. Many regions suffer from violence and corruption.', aim: 'Promote peaceful and inclusive societies and provide access to justice for all.', progress: 60, officialUrl: 'https://www.un.org/sustainabledevelopment/peace-justice/' },
+            { id: 17, number: '17', title: 'Partnerships for the Goals', shortTitle: 'Partnerships', color: '#19486A', gradient: 'linear-gradient(135deg, #19486A 0%, #546E7A 100%)', icon: '🤝', context: 'None of the 16 previous goals can be met without global cooperation between governments, the private sector, and civil society.', aim: 'Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.', progress: 50, officialUrl: 'https://www.un.org/sustainabledevelopment/globalpartnerships/' }
+        ];
+
+        // Resources data
+        const resources = [
+            { id: 1, title: 'Official SDG Branding & Icons', description: 'Download high-resolution icons and official branding materials for all 17 SDGs', url: 'https://www.un.org/sustainabledevelopment/news/communications-material/', category: 'design', type: 'Icons & Graphics', color: '#E5243B', icon: '🎨', featured: true },
+            { id: 2, title: 'Global Goals Platform', description: 'Clean, modern website with action-focused content and developer-friendly visuals', url: 'https://www.globalgoals.org/', category: 'content', type: 'Content Platform', color: '#4C9F38', icon: '🌐', featured: true },
+            { id: 3, title: 'SDG Tracker - Our World in Data', description: 'Interactive data visualizations showing real-time progress on SDG indicators', url: 'https://sdg-tracker.org/', category: 'data', type: 'Data & Analytics', color: '#0A97D9', icon: '📊', featured: true },
+            { id: 4, title: 'UNDP Knowledge Hub', description: 'Impact stories, case studies, and implementation resources', url: 'https://www.undp.org/sustainable-development-goals', category: 'implementation', type: 'Implementation Guide', color: '#19486A', icon: '📚', featured: false },
+            { id: 5, title: 'SDG API Services', description: 'REST APIs for accessing SDG indicators and metadata', url: 'https://unstats.un.org/sdgapi/swagger/', category: 'developer', type: 'API', color: '#FD6925', icon: '🔌', featured: false },
+            { id: 6, title: 'SDG Color Palette', description: 'Official color codes and design guidelines for all 17 SDGs', url: 'https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/07/SDG_brand_guide.pdf', category: 'design', type: 'Design System', color: '#A21942', icon: '🎨', featured: false },
+            { id: 7, title: 'SDG Data Explorer', description: 'Interactive tool to explore SDG data by country and indicator', url: 'https://unstats-undesa.opendata.arcgis.com/', category: 'data', type: 'Data Tools', color: '#56C02B', icon: '🔍', featured: false },
+            { id: 8, title: 'SDG Good Practices', description: 'Collection of successful SDG implementation practices', url: 'https://sdgs.un.org/publications/sdg-good-practices', category: 'implementation', type: 'Case Studies', color: '#3F7E44', icon: '📈', featured: false },
+            { id: 9, title: 'SDG JavaScript SDK', description: 'Open-source JavaScript library for SDG data visualization', url: 'https://github.com/unstats/sdg-indicators', category: 'developer', type: 'Developer Tools', color: '#00689D', icon: '💻', featured: false },
+            { id: 10, title: 'SDG Media Compact', description: 'Resources for media professionals covering SDGs', url: 'https://www.un.org/sustainabledevelopment/sdg-media-compact/', category: 'content', type: 'Media Resources', color: '#FF3A21', icon: '📰', featured: false }
+        ];
+
+        // Categories
+        const categories = [
+            { id: 'all', label: 'All Resources', icon: '📚', color: '#0A8A4D' },
+            { id: 'design', label: 'Design', icon: '🎨', color: '#E5243B' },
+            { id: 'developer', label: 'Developer', icon: '💻', color: '#FD6925' },
+            { id: 'data', label: 'Data & Analytics', icon: '📊', color: '#0A97D9' },
+            { id: 'content', label: 'Content', icon: '📝', color: '#4C9F38' },
+            { id: 'implementation', label: 'Implementation', icon: '🚀', color: '#19486A' }
+        ];
+
+        // State variables
+        let activeView = 'ai';
+        let selectedCategory = 'all';
+        let apiKey = localStorage.getItem('geminiApiKey') || '';
+        let chatHistory = [];
+
+        // DOM Elements
+        const viewCardsBtn = document.getElementById('viewCards');
+        const viewResourcesBtn = document.getElementById('viewResources');
+        const viewAIBtn = document.getElementById('viewAI');
+        const cardsSection = document.getElementById('cardsSection');
+        const resourcesSection = document.getElementById('resourcesSection');
+        const aiSection = document.getElementById('aiSection');
+        const searchInput = document.getElementById('searchInput');
+        const sdgFilters = document.getElementById('sdgFilters');
+        const sdgCardsGrid = document.getElementById('sdgCardsGrid');
+        const resourceCategories = document.getElementById('resourceCategories');
+        const resourcesGrid = document.getElementById('resourcesGrid');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
+        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const saveApiKeyBtn = document.getElementById('saveApiKey');
+        const searchBtn = document.getElementById('searchBtn');
+
+        // Initialize the application
+        function init() {
+            // Load API key if available
+            if (apiKey) {
+                apiKeyInput.value = '••••••••••••••••••••';
+            }
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Render initial content
+            renderSdgFilters();
+            renderSdgCards();
+            renderResourceCategories();
+            renderResources();
+            
+            // Set active view
+            switchView(activeView);
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // View switching
+            viewCardsBtn.addEventListener('click', () => switchView('cards'));
+            viewResourcesBtn.addEventListener('click', () => switchView('resources'));
+            viewAIBtn.addEventListener('click', () => switchView('ai'));
+            
+            // Search functionality
+            searchInput.addEventListener('input', handleSearch);
+            searchBtn.addEventListener('click', handleSearchButton);
+            
+            // AI Chat functionality
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            sendMessageBtn.addEventListener('click', sendMessage);
+            
+            // Suggestion buttons
+            suggestionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const prompt = btn.getAttribute('data-prompt');
+                    chatInput.value = prompt;
+                    sendMessage();
+                });
+            });
+            
+            // API key handling
+            saveApiKeyBtn.addEventListener('click', saveApiKey);
+        }
+
+        // Handle search button click
+        function handleSearchButton() {
+            if (activeView === 'ai') {
+                // If in AI view, use the search query as a chat message
+                const query = searchInput.value.trim();
+                if (query) {
+                    chatInput.value = query;
+                    sendMessage();
+                    searchInput.value = '';
+                }
+            } else {
+                // For other views, just trigger the search
+                handleSearch();
+            }
+        }
+
+        // Switch between views
+        function switchView(view) {
+            activeView = view;
+            
+            // Update active button
+            viewCardsBtn.classList.toggle('active', view === 'cards');
+            viewResourcesBtn.classList.toggle('active', view === 'resources');
+            viewAIBtn.classList.toggle('active', view === 'ai');
+            
+            // Show/hide sections
+            cardsSection.classList.toggle('hidden', view !== 'cards');
+            resourcesSection.classList.toggle('hidden', view !== 'resources');
+            aiSection.classList.toggle('hidden', view !== 'ai');
+            
+            // Update search placeholder
+            if (view === 'cards') {
+                searchInput.placeholder = 'Search SDGs...';
+            } else if (view === 'resources') {
+                searchInput.placeholder = 'Search resources...';
+            } else {
+                searchInput.placeholder = 'Ask about SDGs, progress, or implementation...';
+            }
+            
+            // Clear search when switching views
+            searchInput.value = '';
+        }
+
+        // Render SDG filter buttons
+        function renderSdgFilters() {
+            sdgFilters.innerHTML = '';
+            sdgs.forEach(sdg => {
+                const button = document.createElement('button');
+                button.className = 'sdg-filter-btn';
+                button.style.background = sdg.gradient;
+                button.innerHTML = `
+                    <span class="filter-number">${sdg.number}</span>
+                    <span class="filter-title">${sdg.shortTitle}</span>
+                `;
+                button.addEventListener('click', () => filterSdgs(sdg.id));
+                sdgFilters.appendChild(button);
+            });
+        }
+
+        // Render SDG cards
+        function renderSdgCards(filteredSdgs = sdgs) {
+            sdgCardsGrid.innerHTML = '';
+            filteredSdgs.forEach((sdg, index) => {
+                const card = document.createElement('div');
+                card.className = 'sdg-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                // Calculate stroke dasharray for progress ring
+                const circumference = 2 * Math.PI * 25; // r = 25
+                const progressDashArray = `${(sdg.progress / 100) * circumference} ${circumference}`;
+                
+                card.innerHTML = `
+                    <div class="sdg-card-inner">
+                        <div class="card-header">
+                            <div class="sdg-number-glow" style="background: ${sdg.gradient}">
+                                ${sdg.number}
+                            </div>
+                            <div class="progress-ring">
+                                <svg width="60" height="60">
+                                    <circle cx="30" cy="30" r="25" fill="transparent" stroke="rgba(255,255,255,0.2)" stroke-width="4"></circle>
+                                    <circle cx="30" cy="30" r="25" fill="transparent" stroke="${sdg.color}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${progressDashArray}" transform="rotate(-90 30 30)"></circle>
+                                </svg>
+                                <span class="progress-text">${sdg.progress}%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="sdg-icon-wrapper">
+                                <span class="sdg-icon">${sdg.icon}</span>
+                            </div>
+                            <h3 class="sdg-title">${sdg.title}</h3>
+                            <p class="sdg-context">${sdg.context.substring(0, 100)}...</p>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="action-buttons">
+                                <button class="quick-action" onclick="window.open('${sdg.officialUrl}', '_blank')">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                                <button class="quick-action" onclick="askAboutSDG(${sdg.id})">
+                                    <i class="fas fa-robot"></i>
+                                </button>
+                            </div>
+                            <span class="learn-more">Click for details →</span>
+                        </div>
+                        
+                        <div class="card-glow" style="background: ${sdg.gradient}"></div>
+                    </div>
+                `;
+                
+                // Add click event to show details
+                card.addEventListener('click', () => showSdgDetail(sdg));
+                sdgCardsGrid.appendChild(card);
+            });
+        }
+
+        // Show SDG detail
+        function showSdgDetail(sdg) {
+            switchView('ai');
+            chatInput.value = `Tell me about SDG ${sdg.number}: ${sdg.title}`;
+            sendMessage();
+        }
+
+        // Ask about specific SDG
+        function askAboutSDG(sdgId) {
+            const sdg = sdgs.find(s => s.id === sdgId);
+            if (sdg) {
+                switchView('ai');
+                chatInput.value = `What are the key challenges and solutions for ${sdg.title}?`;
+                sendMessage();
+            }
+        }
+
+        // Filter SDGs by search query
+        function handleSearch() {
+            const query = searchInput.value.toLowerCase();
+            
+            if (activeView === 'cards') {
+                const filteredSdgs = sdgs.filter(sdg => 
+                    sdg.title.toLowerCase().includes(query) ||
+                    sdg.context.toLowerCase().includes(query) ||
+                    sdg.shortTitle.toLowerCase().includes(query) ||
+                    sdg.number.toLowerCase().includes(query) ||
+                    sdg.aim.toLowerCase().includes(query)
+                );
+                renderSdgCards(filteredSdgs);
+            } else if (activeView === 'resources') {
+                const filteredResources = selectedCategory === 'all' 
+                    ? resources.filter(resource => 
+                        resource.title.toLowerCase().includes(query) ||
+                        resource.description.toLowerCase().includes(query) ||
+                        resource.type.toLowerCase().includes(query) ||
+                        resource.category.toLowerCase().includes(query))
+                    : resources.filter(resource => 
+                        resource.category === selectedCategory &&
+                        (resource.title.toLowerCase().includes(query) ||
+                         resource.description.toLowerCase().includes(query) ||
+                         resource.type.toLowerCase().includes(query)));
+                renderResources(filteredResources);
+            }
+        }
+
+        // Render resource categories
+        function renderResourceCategories() {
+            resourceCategories.innerHTML = '';
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = `category-btn ${selectedCategory === category.id ? 'active' : ''}`;
+                button.style.setProperty('--category-color', category.color);
+                button.style.borderColor = selectedCategory === category.id ? category.color : 'transparent';
+                button.innerHTML = `
+                    <span class="category-icon">${category.icon}</span>
+                    <span class="category-label">${category.label}</span>
+                `;
+                button.addEventListener('click', () => {
+                    selectedCategory = category.id;
+                    renderResourceCategories();
+                    renderResources();
+                });
+                resourceCategories.appendChild(button);
+            });
+        }
+
+        // Render resources
+        function renderResources(filteredResources = null) {
+            const resourcesToShow = filteredResources || 
+                (selectedCategory === 'all' ? resources : resources.filter(r => r.category === selectedCategory));
+            
+            resourcesGrid.innerHTML = '';
+            resourcesToShow.forEach((resource, index) => {
+                const card = document.createElement('div');
+                card.className = 'resource-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="resource-header">
+                        <div class="resource-icon" style="background: ${resource.color}">
+                            ${resource.icon}
+                        </div>
+                        <div class="resource-type-badge" style="background: ${resource.color}">
+                            ${resource.type}
+                        </div>
+                    </div>
+                    <div class="resource-body">
+                        <h4 class="resource-title">${resource.title}</h4>
+                        <p class="resource-description">${resource.description}</p>
+                    </div>
+                    <div class="resource-footer">
+                        <button class="resource-action-btn" onclick="window.open('${resource.url}', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open
+                        </button>
+                        <button class="bookmark-btn" onclick="bookmarkResource(${resource.id})">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                `;
+                
+                resourcesGrid.appendChild(card);
+            });
+        }
+
+        // Bookmark resource
+        function bookmarkResource(resourceId) {
+            const resource = resources.find(r => r.id === resourceId);
+            if (resource) {
+                let bookmarks = JSON.parse(localStorage.getItem('resourceBookmarks') || '[]');
+                bookmarks.push(resource);
+                localStorage.setItem('resourceBookmarks', JSON.stringify(bookmarks));
+                
+                // Show confirmation
+                addMessage('Bookmark added successfully!', 'user');
+            }
+        }
+
+        // Save API key
+        function saveApiKey() {
+            const key = apiKeyInput.value;
+            if (key && key !== '••••••••••••••••••••') {
+                apiKey = key;
+                localStorage.setItem('geminiApiKey', key);
+                apiKeyInput.value = '••••••••••••••••••••';
+                addMessage('API key saved successfully! You can now use the AI features.', 'ai');
+            } else {
+                addMessage('Please enter a valid API key to enable AI features.', 'ai');
+            }
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}-message`;
+            
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar ${sender}-avatar">
+                    <i class="fas fa-${sender === 'ai' ? 'robot' : 'user'}"></i>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Add to history
+            chatHistory.push({ sender, text, time });
+        }
+
+        // Send message to Gemini API
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+            
+            // Disable send button while thinking
+            sendMessageBtn.disabled = true;
+            sendMessageBtn.innerHTML = '<div class="thinking-dots"><span></span><span></span><span></span></div>';
+            
+            // Check if API key is available
+            if (!apiKey) {
+                addMessage('Please enter your Gemini API key in the header to enable AI features. You can get one from https://makersuite.google.com/app/apikey', 'ai');
+                sendMessageBtn.disabled = false;
+                sendMessageBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
+                return;
+            }
+            
+            try {
+                // Show thinking indicator
+                const thinkingDiv = document.createElement('div');
+                thinkingDiv.className = 'chat-message ai-message';
+                thinkingDiv.innerHTML = `
+                    <div class="message-avatar ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            <div class="thinking-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.appendChild(thinkingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Call Gemini API
+                const response = await callGeminiAPI(message);
+                
+                // Remove thinking indicator
+                chatMessages.removeChild(thinkingDiv);
+                
+                // Add AI response
+                addMessage(response, 'ai');
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                addMessage('Sorry, I encountered an error. Please check your API key and try again. Error: ' + error.message, 'ai');
+            } finally {
+                // Re-enable send button
+                sendMessageBtn.disabled = false;
+                sendMessageBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
+            }
+        }
+
+        // Call Gemini API (FIXED IMPLEMENTATION)
+        async function callGeminiAPI(prompt) {
+            // Get Gemini API key
+            const apiKey = localStorage.getItem('geminiApiKey');
+            
+            if (!apiKey) {
+                throw new Error('API key not found. Please enter your Gemini API key.');
+            }
+            
+            // Prepare the context with SDG information
+            const sdgContext = sdgs.map(sdg => 
+                `SDG ${sdg.number}: ${sdg.title} - ${sdg.context} Current progress: ${sdg.progress}%`
+            ).join('\n\n');
+            
+            // Updated API endpoint for Gemini 1.5
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${apiKey}`;
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            role: "user",
+                            parts: [{
+                                text: `You are an expert on the United Nations Sustainable Development Goals (SDGs). 
+                                
+                                Here is the complete information about all 17 SDGs:
+                                ${sdgContext}
+                                
+                                User Question: ${prompt}
+                                
+                                Please provide a detailed, accurate, and helpful response about SDGs based on the context above. 
+                                If the user asks about progress, mention specific percentages and achievements.
+                                If the user asks about implementation, provide practical strategies.
+                                If the user asks about connections between goals, explain the synergies.
+                                
+                                Keep your response concise but informative, and always cite specific SDG numbers when relevant.
+                                If you don't know something, acknowledge it and suggest where to find more information.`
+                            }]
+                        }],
+                        generationConfig: {
+                            temperature: 0.7,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 1024,
+                        },
+                        safetySettings: [
+                            {
+                                category: "HARM_CATEGORY_HARASSMENT",
+                                threshold: "BLOCK_NONE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_HATE_SPEECH",
+                                threshold: "BLOCK_NONE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                                threshold: "BLOCK_NONE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                                threshold: "BLOCK_NONE"
+                            }
+                        ]
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(errorData.error?.message || `API request failed with status ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('API Response:', data);
+                
+                // Extract the response text - Updated for newer API format
+                if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                    return data.candidates[0].content.parts[0].text;
+                } else if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+                    // Alternative format
+                    return data.choices[0].message.content;
+                } else {
+                    console.error('Unexpected API response format:', data);
+                    
+                    // Fallback to a detailed response based on SDG data
+                    let fallbackResponse = generateFallbackResponse(prompt);
+                    return fallbackResponse + "\n\n(Note: Using fallback response as API format was unexpected)";
+                }
+            } catch (error) {
+                console.error('API Error details:', error);
+                
+                // Generate a fallback response if API fails
+                const fallbackResponse = generateFallbackResponse(prompt);
+                return fallbackResponse + "\n\n(Note: This is a fallback response. Please check your API key and try again.)";
+            }
+        }
+
+        // Generate fallback response when API fails
+        function generateFallbackResponse(prompt) {
+            const lowerPrompt = prompt.toLowerCase();
+            let response = "";
+            
+            // Check if asking about a specific SDG
+            for (const sdg of sdgs) {
+                if (lowerPrompt.includes(`sdg ${sdg.number}`) || 
+                    lowerPrompt.includes(`goal ${sdg.number}`) || 
+                    lowerPrompt.includes(sdg.title.toLowerCase()) ||
+                    lowerPrompt.includes(sdg.shortTitle.toLowerCase())) {
+                    
+                    response = `For SDG ${sdg.number} (${sdg.title}), the current global progress is approximately ${sdg.progress}%. 
+                    
+                    Key Context: ${sdg.context}
+                    
+                    Primary Aim: ${sdg.aim}
+                    
+                    Key Challenges:
+                    ${getChallengesForSDG(sdg.id)}
+                    
+                    Implementation Strategies:
+                    ${getStrategiesForSDG(sdg.id)}
+                    
+                    You can learn more at: ${sdg.officialUrl}`;
+                    return response;
+                }
+            }
+            
+            // Check for common questions
+            if (lowerPrompt.includes('progress') || lowerPrompt.includes('status')) {
+                const topSdgs = sdgs.sort((a, b) => b.progress - a.progress);
+                response = "Based on current data, here are the SDGs with the highest progress:\n\n";
+                topSdgs.slice(0, 5).forEach(sdg => {
+                    response += `• SDG ${sdg.number} (${sdg.title}): ${sdg.progress}% progress\n`;
+                });
+                response += "\nSDGs needing urgent attention:\n";
+                sdgs.sort((a, b) => a.progress - b.progress).slice(0, 3).forEach(sdg => {
+                    response += `• SDG ${sdg.number} (${sdg.title}): Only ${sdg.progress}% progress\n`;
+                });
+            } else if (lowerPrompt.includes('climate') || lowerPrompt.includes('sdg 13')) {
+                const sdg13 = sdgs.find(s => s.id === 13);
+                response = `SDG 13 (Climate Action) has ${sdg13.progress}% global progress. Key actions needed:\n
+                1. Reduce greenhouse gas emissions by 45% by 2030\n
+                2. Increase climate finance to developing countries\n
+                3. Strengthen resilience to climate-related hazards\n
+                4. Integrate climate measures into national policies`;
+            } else if (lowerPrompt.includes('poverty') || lowerPrompt.includes('sdg 1')) {
+                const sdg1 = sdgs.find(s => s.id === 1);
+                response = `SDG 1 (No Poverty) has ${sdg1.progress}% global progress. Key strategies:\n
+                1. Implement social protection systems\n
+                2. Ensure equal rights to economic resources\n
+                3. Build resilience of the poor to climate-related events\n
+                4. Mobilize resources for poverty eradication programs`;
+            } else {
+                // General response
+                response = `Based on the 17 Sustainable Development Goals, I can provide insights on:
+                
+                1. Individual SDG progress and status
+                2. Implementation strategies
+                3. Interconnections between goals
+                4. Global and regional progress
+                
+                You can ask about specific SDGs by number or name, or explore the SDG cards section for detailed information on each goal.`;
+            }
+            
+            return response;
+        }
+
+        // Helper functions for fallback responses
+        function getChallengesForSDG(id) {
+            const challenges = {
+                1: "• Persistent inequality • Limited social protection • Climate vulnerability",
+                2: "• Conflict and instability • Climate change impacts • Food waste and loss",
+                3: "• Healthcare access gaps • Pandemic preparedness • Mental health stigma",
+                4: "• Digital divide • Education quality disparities • Limited lifelong learning",
+                5: "• Gender-based violence • Unequal pay • Underrepresentation in leadership",
+                6: "• Water scarcity • Pollution • Sanitation gaps",
+                7: "• Fossil fuel dependency • Energy poverty • Infrastructure costs",
+                8: "• Unemployment • Informal economy • Skills mismatch",
+                9: "• Infrastructure gaps • Digital divide • Innovation funding",
+                10: "• Wealth concentration • Discrimination • Migration challenges",
+                11: "• Urban sprawl • Pollution • Housing affordability",
+                12: "• Overconsumption • Waste management • Supply chain transparency",
+                13: "• Emissions reduction • Climate finance • Policy implementation",
+                14: "• Ocean pollution • Overfishing • Acidification",
+                15: "• Deforestation • Biodiversity loss • Land degradation",
+                16: "• Corruption • Access to justice • Conflict resolution",
+                17: "• Funding gaps • Policy coherence • Data availability"
+            };
+            return challenges[id] || "• Implementation gaps • Funding constraints • Policy coordination";
+        }
+
+        function getStrategiesForSDG(id) {
+            const strategies = {
+                1: "• Social safety nets • Financial inclusion • Sustainable livelihoods",
+                2: "• Sustainable agriculture • Food security programs • Reduced food waste",
+                3: "• Universal healthcare • Disease prevention • Health workforce development",
+                4: "• Quality education • Digital learning • Teacher training",
+                5: "• Equal rights legislation • Economic empowerment • Leadership opportunities",
+                6: "• Water management • Sanitation infrastructure • Pollution control",
+                7: "• Renewable energy • Energy efficiency • Access expansion",
+                8: "• Decent work policies • Skills development • Entrepreneurship support",
+                9: "• Infrastructure investment • Innovation ecosystems • Digital connectivity",
+                10: "• Progressive policies • Equal opportunities • Migration support",
+                11: "• Sustainable urban planning • Public transportation • Green spaces",
+                12: "• Circular economy • Sustainable procurement • Consumer awareness",
+                13: "• Climate policies • Renewable transition • Adaptation measures",
+                14: "• Marine protection • Sustainable fishing • Pollution reduction",
+                15: "• Forest conservation • Ecosystem restoration • Biodiversity protection",
+                16: "• Anti-corruption measures • Access to justice • Peacebuilding",
+                17: "• Partnerships • Technology transfer • Capacity building"
+            };
+            return strategies[id] || "• Multi-stakeholder partnerships • Policy integration • Resource mobilization";
+        }
+
+        // Filter SDGs by ID
+        function filterSdgs(sdgId) {
+            const filteredSdgs = sdgId ? sdgs.filter(sdg => sdg.id === sdgId) : sdgs;
+            renderSdgCards(filteredSdgs);
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
